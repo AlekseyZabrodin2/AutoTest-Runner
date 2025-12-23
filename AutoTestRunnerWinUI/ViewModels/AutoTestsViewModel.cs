@@ -1,35 +1,23 @@
 ﻿using AutoTestRunnerWinUI.Models;
 using AutoTestRunnerWinUI.Models.TestConfig;
 using AutoTestRunnerWinUI.Services;
-using AutoTestRunnerWinUI.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NLog.Extensions.Logging;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Threading;
 using Visibility = Microsoft.UI.Xaml.Visibility;
 
 
@@ -146,7 +134,6 @@ namespace AutoTestRunnerWinUI.ViewModels
         [ObservableProperty]
         public int _completedTestsCount = 0;
 
-        //[ObservableProperty]
         private int? _selectedPassStatus = 0;
 
         public int? SelectedPassStatus
@@ -163,7 +150,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
         }
 
-        //[ObservableProperty]
         private int? _selectedFailedStatus = 0;
 
         public int? SelectedFailedStatus
@@ -180,7 +166,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
         }
 
-        //[ObservableProperty]
         private int? _selectedSkippedStatus = 0;
 
         public int? SelectedSkippedStatus
@@ -245,8 +230,6 @@ namespace AutoTestRunnerWinUI.ViewModels
         [ObservableProperty]
         public double _blurEffectRadius = 1;
 
-        //private IOptions<TestsWorkDirectory> _testsWorkDirectory;
-
         private IOptions<ReportSettings> _testsWorkDirectory;
 
         [ObservableProperty]
@@ -255,7 +238,6 @@ namespace AutoTestRunnerWinUI.ViewModels
         [ObservableProperty]
         private Visibility? _visibilityReportButton = Visibility.Collapsed;
 
-        //[ObservableProperty]
         private DateTime _timeStartTests;
 
         public DateTime TimeStartTests
@@ -274,7 +256,6 @@ namespace AutoTestRunnerWinUI.ViewModels
 
         public string StringTimeStartTests => _timeStartTests.ToString("HH:mm:ss");
 
-        //[ObservableProperty]
         private DateTime _timeStopTests;
 
         public DateTime TimeStopTests
@@ -343,7 +324,6 @@ namespace AutoTestRunnerWinUI.ViewModels
 
 
 
-
         private void UpdateTestSuitModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(RetrySelectedCount))
@@ -375,7 +355,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
         }
 
-
         public void ConfigBuilder(IServiceProvider serviceProvider, string pageName)
         {
             _logger.Trace("Enter config builder");
@@ -402,7 +381,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
         }
 
-
         public void ConfigureViewModels(IServiceProvider serviceProvider, string pageName)
         {
             var optionsSnapshot = serviceProvider.GetRequiredService<IOptionsSnapshot<TestsWorkDirectory>>();
@@ -417,7 +395,6 @@ namespace AutoTestRunnerWinUI.ViewModels
 
             //_testsWorkDirectory = Options.Create(selectedConfig);
         }
-
 
         public void GetTestNames()
         {
@@ -529,7 +506,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
         }
 
-
         public ObservableCollection<TestSuiteModel> GetSelectedTestsCollection()
         {
             SelectedTestsCollection = new();
@@ -567,7 +543,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
             return SelectedTestsCollection;
         }
-
 
         [RelayCommand]
         private async Task RunAutoTest()
@@ -674,7 +649,6 @@ namespace AutoTestRunnerWinUI.ViewModels
                 _logger.Error($"Exception during RunAutoTest method: {ex.Message}");
             }
         }
-
 
         public async Task RunTests(string projectPath, TestMethodModel testMethod)
         {
@@ -824,7 +798,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             ExtentReport.GetTestsStatus(TestStatusResult);
         }
 
-
         private void GetAllErrorMessage(DataReceivedEventArgs args, ref TestErrorInformation errorInformation)
         {
             string errorData = args.Data;
@@ -842,7 +815,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             GetStackTraceMessage(args, ref errorInformation);
             GetStandardOutputMessage(args, ref errorInformation);
         }
-
 
         private void GetErrorMessage(DataReceivedEventArgs args, ref TestErrorInformation errorInformation)
         {
@@ -875,7 +847,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             }
         }
 
-
         private void GetStackTraceMessage(DataReceivedEventArgs args, ref TestErrorInformation errorInformation)
         {
             string errorData = args.Data;
@@ -899,7 +870,6 @@ namespace AutoTestRunnerWinUI.ViewModels
                 File.WriteAllText(filePath, errorInformation.StackTraceMessage);
             }
         }
-
 
         private void GetStandardOutputMessage(DataReceivedEventArgs args, ref TestErrorInformation errorInformation)
         {
@@ -929,15 +899,6 @@ namespace AutoTestRunnerWinUI.ViewModels
             _testRunnerProcess.Exited += (s, e) => tcs.SetResult(null);
             await tcs.Task;
         }
-
-
-
-
-
-
-
-
-
 
         [RelayCommand]
         private void StopAutoTest()
@@ -1020,6 +981,5 @@ namespace AutoTestRunnerWinUI.ViewModels
             VisibilityReportButton = Visibility.Collapsed;
             TimeStopTests = new();
         }
-
     }
 }
