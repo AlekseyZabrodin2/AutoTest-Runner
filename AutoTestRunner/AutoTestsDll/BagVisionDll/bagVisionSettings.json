@@ -1,0 +1,17 @@
+﻿{
+  "WorkDirectorys": {
+
+    "AssemblyPath": "D:\\Develop\\BagVision\\Baggage.AutoTest.BagScan\\bin\\Debug\\net8.0-windows8.0\\Baggage.AutoTest.BagScan.dll",
+
+    "PathToTestProject": "C:\\Users\\Zabrodin\\Desktop\\UniExpertTestRunnerDll\\Adani.Medicine.Modules.AutoTests.UniExpert.csproj",
+
+    "PathToTestConfig": "C:\\Users\\Zabrodin\\Desktop\\UniExpertTestRunnerDll\\bin\\Debug\\net8.0-windows8.0\\",
+
+    "ExtReportPath": ".\\Report.html",
+
+    "OldNameFullPath": ".\\Report.html",
+
+    "NewNameFullPath": ".\\logsApp\\ReportResults\\BagScanReports\\BagScan"
+
+  }
+}

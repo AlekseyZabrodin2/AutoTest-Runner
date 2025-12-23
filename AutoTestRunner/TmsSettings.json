@@ -1,0 +1,31 @@
+﻿{
+	"TmsSettings": {
+
+		"TmsRunner": "D:\\Develop\\UniExpert\\Sources\\Adani.Medicine.Modules.AutoTests.UniExpert\\TmsRunner.exe",
+
+		"VsTestRunner": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\Extensions\\TestPlatform\\vstest.console.exe",
+
+		"TestAssembly": "D:\\Develop\\UniExpert\\Sources\\Adani.Medicine.Modules.AutoTests.UniExpert\\bin\\Debug\\net8.0-windows8.0\\Adani.Medicine.Modules.AutoTests.UniExpert.dll",
+
+		"TmsUrl": "http://aserver-testlt.adani.by",
+
+		"TmsPrivateToken": "NzVwamJ6VG45VkJnZHpCd1lh",
+
+		"TmsProjectId": "6b939142-713f-4ba0-ac0c-e00172aeec99",
+
+		"TmsConfigurationId": "22f31ca9-283e-4a95-8edd-e1531fd067a8",
+
+		"TmsAdapterMode": "0",
+
+		"TmsTestRunId": "c30d2229-3321-4a68-a8f7-759b8300b17c",
+
+		"TmsTestRunName": "TestsFromTestIt",
+
+		"TmsAutomaticCreationTestCases": "true",
+
+		"TmsCertValidation": "true",
+
+		"TmsLabelsOfTestsToRun": "smoke,regress"
+
+	}
+}

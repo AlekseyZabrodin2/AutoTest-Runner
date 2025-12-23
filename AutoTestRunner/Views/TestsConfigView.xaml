@@ -1,0 +1,335 @@
+﻿<Window
+    x:Class="AutoTestRunner.Views.TestsConfigView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:AutoTestRunner.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AutoTestRunner.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:AutoTestRunner.Model"
+    d:DataContext="{d:DesignInstance Type=models:TestConfigProperties,
+                                     IsDesignTimeCreatable=False}"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="SingleBorderWindow"
+    mc:Ignorable="d">
+
+
+    <Window.Resources>
+        <convert:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    </Window.Resources>
+
+
+    <Grid>
+
+        <DockPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="10,10,10,10">
+
+
+
+            <Grid x:Name="TestsConfigGrid" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Text="Test Config Settings" />
+
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="30,0,10,10"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Test Name" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,10,50,20"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold">
+                    <Underline>
+                        <Run Text="{Binding TestName}" />
+                    </Underline>
+                </TextBlock>
+
+
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Lastname"
+                    Visibility="{Binding LastName, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding LastName, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Firstname"
+                    Visibility="{Binding FirstName, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding FirstName, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Middlename"
+                    Visibility="{Binding MiddleName, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding MiddleName, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Gender"
+                    Visibility="{Binding Gender, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding Gender, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Address"
+                    Visibility="{Binding Address, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding Address, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Phone Number"
+                    Visibility="{Binding PhoneNumber, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding PhoneNumber, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Comments"
+                    Visibility="{Binding Comments, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding Comments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding Comments, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Test repeats"
+                    Visibility="{Binding RepeatNumber, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding RepeatNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding RepeatNumber, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <TextBlock
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Margin="30,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="Expected Result"
+                    Visibility="{Binding ExpectedResult, Converter={StaticResource NullToVisibilityConverter}}" />
+                <TextBox
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Margin="10,5,20,5"
+                    Padding="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Text="{Binding ExpectedResult, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding ExpectedResult, Converter={StaticResource NullToVisibilityConverter}}" />
+
+                <Grid
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    VerticalAlignment="Center"
+                    ShowGridLines="False">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,0,10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="{Binding BuildProjectResultForeground}"
+                        Text="{Binding BuildProjectResult}" />
+
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Width="80"
+                        Height="30"
+                        Margin="0,0,15,10"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CancelSavingCommand}"
+                        Content="Cancel" />
+
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="80"
+                        Height="30"
+                        Margin="15,0,0,10"
+                        HorizontalAlignment="Left"
+                        Command="{Binding SaveJsonSettingsCommand}"
+                        Content="Save" />
+
+                </Grid>
+
+            </Grid>
+        </DockPanel>
+
+
+
+    </Grid>
+</Window>

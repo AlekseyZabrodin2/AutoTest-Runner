@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+	<TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+
+	<WindowsSdkPackageVersion>10.0.26100.38</WindowsSdkPackageVersion>
+    <RootNamespace>AutoTestRunnerWinUI</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
+	 <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+	 <PublishProfile>Properties\PublishProfiles\win-$(Platform).pubxml</PublishProfile>
+	 <ImplicitUsings>enable</ImplicitUsings>
+	 <Nullable>enable</Nullable>
+	 <UseWinUI>true</UseWinUI>
+	 <ApplicationIcon>testIcon.ico</ApplicationIcon>
+	 <EnableMsixTooling>true</EnableMsixTooling>
+	 <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+	 <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	  <!--The SatelliteResourceLanguages ​​property lets you specify which languages ​​you want to preserve satellite resource assemblies for during build and publish.-->
+	  <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+
+	  <!--Set <WindowsPackageType>None</WindowsPackageType> in your project file. In advanced scenarios, if you want control over the initialization, you can call the bootstrapper API directly in your app's startup code-->
+	  <!--<WindowsPackageType>None</WindowsPackageType>-->
+
+	  <!--WinUI 3 doesn't need support for 'INotifyPropertyChanging', so we can disable it. This avoids all generated code for it and provides a small performance improvement.-->
+	  <MvvmToolkitEnableINotifyPropertyChangingSupport>false</MvvmToolkitEnableINotifyPropertyChangingSupport>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+	<PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.1.240821" />
+	<PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240821" />
+	<PackageReference Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240821" />
+	<PackageReference Include="ExtentReports" Version="5.0.4" />
+	<PackageReference Include="MailKit" Version="4.12.1" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240829007" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.4.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.4.3" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.13" />
+    <PackageReference Include="NUnit" Version="4.3.2" />
+    <PackageReference Include="System.Text.Json" Version="9.0.6" />
+    <PackageReference Include="WinUI.TableView" Version="1.2.0" />
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <!--
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AutoTestsDll\UniExpertDll\uniExpertSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="AppSettings\navigationSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="reportSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="testIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup> 
+
+  <!--
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+</Project>
