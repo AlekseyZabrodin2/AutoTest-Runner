@@ -1,0 +1,11 @@
+﻿{
+  "ReportSettings": {
+
+    "ExtReportPath": ".\\Report.html",
+
+    "OldNameFullPath": ".\\Report.html",
+
+    "NewNameFullPath": ".\\logsApp\\ReportResults\\Reports"
+
+  }
+}

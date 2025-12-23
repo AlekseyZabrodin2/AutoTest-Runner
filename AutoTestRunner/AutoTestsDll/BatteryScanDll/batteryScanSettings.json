@@ -1,0 +1,18 @@
+﻿{
+  "WorkDirectorys": {
+
+    "AssemblyPath": "D:\\Develop\\BatteryScanLast\\Sources\\Tests\\AutoTests\\BatteryScanAuto\\BatteryScanAuto\\bin\\Debug\\net8.0-windows\\BatteryScanAuto.dll",
+
+    "PathToTestProject": "C:\\Users\\Zabrodin\\Desktop\\UniExpertTestRunnerDll\\Adani.Medicine.Modules.AutoTests.UniExpert.csproj",
+
+    "PathToTestConfig": "C:\\Users\\Zabrodin\\Desktop\\UniExpertTestRunnerDll\\bin\\Debug\\net8.0-windows8.0\\",
+
+    "ExtReportPath": ".\\Report.html",
+
+    "OldNameFullPath": ".\\Report.html",
+
+    "NewNameFullPath": ".\\logsApp\\ReportResults\\BatteryScanReports\\BatteryScan"
+
+
+  }
+}

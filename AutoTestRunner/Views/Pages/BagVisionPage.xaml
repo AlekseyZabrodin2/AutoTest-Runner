@@ -1,0 +1,668 @@
+﻿<Page
+    x:Class="AutoTestRunner.Views.Pages.BagVisionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:AutoTestRunner.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AutoTestRunner.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:AutoTestRunner.ViewModels"
+    Title="BagVisionPage"
+    d:DataContext="{d:DesignInstance Type=viewmodels:AutoTestsViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+            <Style.Resources>
+                <!--  Ресурс для установки прозрачного цвета при выделении  -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+            </Style.Resources>
+        </Style>
+        <convert:ResultStatusToColorConverter x:Key="ResultStatusToColorConverter" />
+        <convert:AlternationBackgroundConverter x:Key="AlternationBackgroundConverter" />
+    </Page.Resources>
+
+    <Grid Background="#EAF9B6">
+        <Border
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="0"
+            CornerRadius="1"
+            IsEnabled="{Binding IsWindowEnabled}">
+            <Border.Effect>
+                <BlurEffect Radius="{Binding BlurEffectRadius}" />
+            </Border.Effect>
+
+            <Grid ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <DockPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+
+
+
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            Margin="10"
+                            HorizontalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="Run statistics" />
+
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="30,0,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            FontWeight="DemiBold"
+                            Text="Total count of tests: " />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Width="Auto"
+                            Margin="15,5"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="DemiBold"
+                            Text="{Binding TestsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <DockPanel
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="150,3,0,0"
+                                FontSize="14"
+                                FontWeight="DemiBold"
+                                Text="Start running time:" />
+                            <TextBlock
+                                Margin="10,3,0,0"
+                                FontSize="16"
+                                FontWeight="DemiBold"
+                                Text="{Binding TimeStartTests, StringFormat=HH:mm:ss}" />
+                        </DockPanel>
+
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="30,0,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            FontWeight="DemiBold"
+                            Text="Count of selected tests : " />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="Auto"
+                            Margin="15,5"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="DemiBold"
+                            Text="{Binding SelectedTestsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <DockPanel
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="150,3,0,0"
+                                FontSize="14"
+                                FontWeight="DemiBold"
+                                Text="Total time:" />
+                            <TextBlock
+                                Margin="63,3,0,0"
+                                FontSize="16"
+                                FontWeight="DemiBold"
+                                Text="{Binding TotalTimeString, UpdateSourceTrigger=PropertyChanged}" />
+                        </DockPanel>
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="30,0,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            FontWeight="DemiBold"
+                            Text="Count of all runs: " />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Width="Auto"
+                            Margin="15,5"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="DemiBold"
+                            Text="{Binding CurentSelectedCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <DockPanel
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="150,3,0,0"
+                                FontSize="14"
+                                FontWeight="DemiBold"
+                                Text="End running time:" />
+                            <TextBlock
+                                Margin="16,3,0,0"
+                                FontSize="16"
+                                FontWeight="DemiBold"
+                                Text="{Binding TimeStopTests, StringFormat=HH:mm:ss}" />
+                        </DockPanel>
+
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="30,0,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="14"
+                            FontWeight="DemiBold"
+                            Text="Count of completed tests: " />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Width="Auto"
+                            Margin="15,5"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="DemiBold"
+                            Text="{Binding CompletedTestsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <DockPanel
+                            Grid.Row="4"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Margin="150,0,5,0"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="0,3,0,0"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="{Binding SelectedTestResultColor, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Result'}"
+                                Text="Result - [" />
+                            <TextBlock
+                                Margin="5,3,0,0"
+                                HorizontalAlignment="Left"
+                                FontSize="16"
+                                FontWeight="DemiBold"
+                                Foreground="{Binding SelectedPassStatus, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Passed'}"
+                                Text="{Binding SelectedPassStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Passed [{0}]'}"
+                                Visibility="{Binding VisibilityPassedResult}" />
+
+                            <TextBlock
+                                Margin="10,3,0,0"
+                                HorizontalAlignment="Left"
+                                FontSize="16"
+                                FontWeight="DemiBold"
+                                Foreground="{Binding SelectedFailedStatus, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Failed'}"
+                                Text="{Binding SelectedFailedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Failed [{0}]'}"
+                                Visibility="{Binding VisibilityFailedResult}" />
+
+                            <TextBlock
+                                Margin="10,3,0,0"
+                                HorizontalAlignment="Left"
+                                FontSize="16"
+                                FontWeight="DemiBold"
+                                Foreground="{Binding SelectedSkippedStatus, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Skipped'}"
+                                Text="{Binding SelectedSkippedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Skipped [{0}]'}"
+                                Visibility="{Binding VisibilitySkippedResult}" />
+
+                            <TextBlock
+                                Margin="5,3,0,0"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="{Binding SelectedTestResultColor, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Result'}"
+                                Text="]" />
+                            <Button
+                                Width="100"
+                                Height="30"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                BorderBrush="Black"
+                                BorderThickness="1.5"
+                                Command="{Binding OpenResultReportCommand}"
+                                Content="Open Report"
+                                FontWeight="DemiBold"
+                                Visibility="{Binding VisibilityReportButton}" />
+                        </DockPanel>
+                    </Grid>
+                </DockPanel>
+
+
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,10"
+                    Background="White"
+                    BorderBrush="Black"
+                    BorderThickness="0"
+                    IsEnabled="{Binding IsTestsWindowEnabled}">
+                    <Grid>
+                        <DataGrid
+                            VerticalAlignment="Stretch"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            EnableColumnVirtualization="True"
+                            EnableRowVirtualization="True"
+                            FontSize="14"
+                            HeadersVisibility="Column"
+                            ItemsSource="{Binding ObservedTestSuiteModel, Mode=OneWay}"
+                            VirtualizingStackPanel.IsVirtualizing="True"
+                            VirtualizingStackPanel.VirtualizationMode="Recycling">
+
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="*">
+                                    <DataGridTemplateColumn.Header>
+                                        <Grid>
+                                            <DockPanel>
+                                                <TextBlock FontWeight="Bold" Text="Test Methods:" />
+                                                <CheckBox
+                                                    Margin="10,0,0,0"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Center"
+                                                    Background="{Binding DataContext.AllCheckboxBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                    IsChecked="{Binding DataContext.SelectAll, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                                <TextBlock
+                                                    Margin="10,0"
+                                                    FontWeight="Bold"
+                                                    Text="(select all Tests Suites)" />
+                                                <TextBox
+                                                    Width="35"
+                                                    Margin="169,0"
+                                                    Padding="0,0,0,3"
+                                                    HorizontalAlignment="Right"
+                                                    HorizontalContentAlignment="Center"
+                                                    Text="{Binding DataContext.RetrySelectedCount, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            </DockPanel>
+                                        </Grid>
+
+                                    </DataGridTemplateColumn.Header>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Expander
+                                                Margin="2"
+                                                Background="#b5d7f3"
+                                                BorderBrush="#f4f7fc"
+                                                BorderThickness="0"
+                                                Foreground="Black"
+                                                IsExpanded="{Binding GroupIsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                <Expander.Header>
+                                                    <DockPanel>
+                                                        <Grid ShowGridLines="False">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition MinWidth="400" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <CheckBox
+                                                                Grid.Row="0"
+                                                                Grid.Column="0"
+                                                                Margin="6,4,0,4"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                Background="{Binding CheckboxSuiteBackground}"
+                                                                Command="{Binding SelectTestMethodCommand}"
+                                                                IsChecked="{Binding TestSuiteIsSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                Margin="8,0,0,0"
+                                                                FontWeight="Bold">
+                                                                <TextBlock.Text>
+                                                                    <MultiBinding StringFormat="{}{0} [{1}] - ({2})">
+                                                                        <Binding Path="TestClassNameModel" />
+                                                                        <Binding Path="NumberOfTests" />
+                                                                        <Binding Path="SelectedTestsInSuiteCount" />
+                                                                    </MultiBinding>
+                                                                </TextBlock.Text>
+                                                            </TextBlock>
+
+                                                            <TextBox
+                                                                Grid.Column="2"
+                                                                Width="35"
+                                                                Margin="10,1"
+                                                                HorizontalAlignment="Right"
+                                                                HorizontalContentAlignment="Center"
+                                                                Text="{Binding RetryTestSuiteCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                                                            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    FontWeight="Bold"
+                                                                    Foreground="{Binding ResultColor, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Result'}"
+                                                                    Text="Result  - [" />
+                                                                <TextBlock
+                                                                    x:Name="PassedStatus"
+                                                                    Margin="10,0,0,0"
+                                                                    FontWeight="Bold"
+                                                                    Foreground="{Binding PassStatusTest, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Passed'}"
+                                                                    Text="{Binding PassStatusTest, StringFormat='Passed [{0}]'}"
+                                                                    Visibility="{Binding VisibilityPassResult}" />
+                                                                <TextBlock
+                                                                    x:Name="FailedStatus"
+                                                                    Margin="20,0,0,0"
+                                                                    FontWeight="Bold"
+                                                                    Foreground="{Binding FailedStatusTest, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Failed'}"
+                                                                    Text="{Binding FailedStatusTest, StringFormat='Failed [{0}]'}"
+                                                                    Visibility="{Binding VisibilityFailResult}" />
+                                                                <TextBlock
+                                                                    x:Name="SkippedStatus"
+                                                                    Margin="20,0,0,0"
+                                                                    FontWeight="Bold"
+                                                                    Foreground="{Binding SkippedStatusTest, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Skipped'}"
+                                                                    Text="{Binding SkippedStatusTest, StringFormat='Skipped [{0}]'}"
+                                                                    Visibility="{Binding VisibilitySkipResult}" />
+                                                                <TextBlock
+                                                                    Margin="10,0,0,0"
+                                                                    FontWeight="Bold"
+                                                                    Foreground="{Binding ResultColor, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Result'}"
+                                                                    Text="]" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </DockPanel>
+                                                </Expander.Header>
+
+                                                <Grid
+                                                    Background="Gray"
+                                                    IsEnabled="True"
+                                                    ShowGridLines="False">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition />
+                                                        <RowDefinition />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="30" />
+                                                        <ColumnDefinition Width="563" />
+                                                        <ColumnDefinition Width="55" />
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="70" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <!--<CheckBox
+                                         Grid.Row="0"
+                                         Grid.Column="0"
+                                         Margin="6,4,0,4"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         Command="{Binding SelectTestMethodCommand}"
+                                         IsChecked="{Binding TestSuiteIsSelected}" />-->
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
+                                                        Margin="0,4"
+                                                        Background="Gray"
+                                                        FontWeight="Bold"
+                                                        Foreground="White"
+                                                        Text="Test Method Name" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        Grid.Column="2"
+                                                        Margin="5,4"
+                                                        HorizontalAlignment="Center"
+                                                        Background="Gray"
+                                                        FontWeight="Bold"
+                                                        Foreground="White"
+                                                        Text="Total" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        Grid.Column="3"
+                                                        Margin="0,4"
+                                                        HorizontalAlignment="Left"
+                                                        Background="Gray"
+                                                        FontWeight="Bold"
+                                                        Foreground="White"
+                                                        Text="Done" />
+                                                    <TextBlock
+                                                        Grid.Row="0"
+                                                        Grid.Column="4"
+                                                        Grid.ColumnSpan="2"
+                                                        Margin="60,4"
+                                                        HorizontalAlignment="Left"
+                                                        Background="Gray"
+                                                        FontWeight="Bold"
+                                                        Foreground="White"
+                                                        Text="Result" />
+
+                                                    <ItemsControl
+                                                        Grid.Row="1"
+                                                        Grid.ColumnSpan="6"
+                                                        Foreground="Black"
+                                                        ItemsSource="{Binding TestMethodsModel}">
+
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Border Height="25" Background="{Binding IndexTest, Converter={StaticResource AlternationBackgroundConverter}}">
+                                                                    <DockPanel>
+                                                                        <Grid ShowGridLines="False">
+
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="30" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                            </Grid.ColumnDefinitions>
+
+                                                                            <CheckBox
+                                                                                x:Name="SelectedCheck"
+                                                                                Grid.Column="0"
+                                                                                Width="20"
+                                                                                Margin="5,0"
+                                                                                HorizontalAlignment="Center"
+                                                                                VerticalAlignment="Center"
+                                                                                Background="{Binding CheckboxBackground}"
+                                                                                IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                                                            <TextBlock
+                                                                                x:Name="TestMethodName"
+                                                                                Grid.Column="1"
+                                                                                Width="550"
+                                                                                VerticalAlignment="Center"
+                                                                                Text="{Binding TestMethodName}">
+                                                                                <TextBlock.ToolTip>
+                                                                                    <ToolTip Content="{Binding DescriptionAttribute}">
+                                                                                        <ToolTip.Style>
+                                                                                            <Style TargetType="ToolTip">
+                                                                                                <Style.Triggers>
+                                                                                                    <DataTrigger Binding="{Binding DescriptionAttribute}" Value="{x:Null}">
+                                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                    </DataTrigger>
+                                                                                                    <DataTrigger Binding="{Binding DescriptionAttribute}" Value="">
+                                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                                    </DataTrigger>
+                                                                                                </Style.Triggers>
+                                                                                            </Style>
+                                                                                        </ToolTip.Style>
+                                                                                    </ToolTip>
+                                                                                </TextBlock.ToolTip>
+                                                                            </TextBlock>
+                                                                            <Button
+                                                                                Grid.Column="2"
+                                                                                Margin="0,0,5,0"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Background="Transparent"
+                                                                                BorderBrush="Transparent"
+                                                                                Command="{Binding ChangeJsonSettingsCommand}"
+                                                                                Content="•••"
+                                                                                FontSize="12"
+                                                                                Visibility="{Binding VisibilitysConfigButton}" />
+                                                                            <TextBox
+                                                                                x:Name="RetryCount"
+                                                                                Grid.Column="3"
+                                                                                Width="35"
+                                                                                Margin="5,1"
+                                                                                HorizontalContentAlignment="Center"
+                                                                                Text="{Binding RetryCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                                            <TextBlock
+                                                                                Grid.Column="4"
+                                                                                Width="35"
+                                                                                Margin="5,2"
+                                                                                Padding="15,0"
+                                                                                Text="{Binding CurentCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                                            <TextBlock
+                                                                                Grid.Column="5"
+                                                                                Width="80"
+                                                                                Margin="10,1,2,1"
+                                                                                Padding="4,0,0,0"
+                                                                                FontWeight="DemiBold"
+                                                                                Foreground="{Binding PassStatus, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Passed'}"
+                                                                                Text="{Binding PassStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Passed [{0}]'}" />
+
+                                                                            <TextBlock
+                                                                                Grid.Column="6"
+                                                                                Width="70"
+                                                                                Margin="2,1,5,1"
+                                                                                Padding="10,0,0,0"
+                                                                                HorizontalAlignment="Center"
+                                                                                FontWeight="DemiBold"
+                                                                                Foreground="{Binding FailedStatus, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Failed'}"
+                                                                                Text="{Binding FailedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Failed [{0}]'}" />
+
+                                                                            <TextBlock
+                                                                                Grid.Column="5"
+                                                                                Grid.ColumnSpan="2"
+                                                                                Width="70"
+                                                                                Margin="0,1"
+                                                                                HorizontalAlignment="Center"
+                                                                                FontWeight="DemiBold"
+                                                                                Foreground="{Binding SkipStatus, Converter={StaticResource ResultStatusToColorConverter}, ConverterParameter='Skipped'}"
+                                                                                Text="{Binding SkipStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Skipped [{0}]'}" />
+
+                                                                        </Grid>
+                                                                    </DockPanel>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </Grid>
+                                            </Expander>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </Border>
+
+                <Grid
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    VerticalAlignment="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
+                        Width="100"
+                        Height="50"
+                        Margin="0,0,15,10"
+                        HorizontalAlignment="Right"
+                        BorderBrush="Black"
+                        BorderThickness="1.5"
+                        Command="{Binding GroupExpandedCommand}"
+                        Content="Expand"
+                        FontWeight="DemiBold" />
+
+                    <Button
+                        Grid.Column="1"
+                        Width="100"
+                        Height="50"
+                        Margin="15,0,0,10"
+                        HorizontalAlignment="Left"
+                        BorderBrush="Black"
+                        BorderThickness="1.5"
+                        Command="{Binding GroupCollapseCommand}"
+                        Content="Collapse"
+                        FontWeight="DemiBold" />
+
+                </Grid>
+
+                <Grid
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
+                        Width="100"
+                        Height="50"
+                        Margin="0,0,15,10"
+                        HorizontalAlignment="Right"
+                        BorderBrush="Black"
+                        BorderThickness="1.5"
+                        Command="{Binding RunAutoTestCommand}"
+                        Content="Run"
+                        FontWeight="DemiBold" />
+
+                    <Button
+                        Grid.Column="1"
+                        Width="100"
+                        Height="50"
+                        Margin="15,0,0,10"
+                        HorizontalAlignment="Left"
+                        BorderBrush="Black"
+                        BorderThickness="1.5"
+                        Command="{Binding StopAutoTestCommand}"
+                        Content="Stop"
+                        FontWeight="DemiBold" />
+
+                </Grid>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</Page>
